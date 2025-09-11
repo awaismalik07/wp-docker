@@ -31,7 +31,7 @@ EOF
 a2ensite wordpress
 a2enmod rewrite
 a2dissite 000-default
-apache2ctl -k graceful
+service apache2 reload
 
 
 DBUSER=$(cat /run/secrets/db_user)
