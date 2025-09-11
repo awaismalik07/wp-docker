@@ -5,8 +5,8 @@ mysqld_safe &
 
 sleep 10
 
-DBUSER="wordpress"
-DBPASS="awaismalik"
+DBUSER=$(cat /run/secrets/db_user)
+DBPASS=$(cat /run/secrets/db_pass)
 
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS wordpress;"
 mysql -u root -e "CREATE USER IF NOT EXISTS '$DBUSER'@'%' IDENTIFIED BY '$DBPASS';"

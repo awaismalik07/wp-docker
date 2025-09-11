@@ -31,11 +31,13 @@ EOF
 a2ensite wordpress
 a2enmod rewrite
 a2dissite 000-default
-systemctl reload apache2
+apache2ctl -k graceful
 
 
-DBUSER="wordpress"
-DBPASS="awaismalik"
+DBUSER=$(cat /run/secrets/db_user)
+DBPASS=$(cat /run/secrets/db_pass)
+
+
 DBHOST="mysql"
 DBNAME="wordpress"
 
