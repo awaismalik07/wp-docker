@@ -1,20 +1,20 @@
 #!/bin/bash
 
 # --- Update system ---
-apt update -y
-apt upgrade -y
+#apt update -y
+#apt upgrade -y
 
 # --- Install Apache, PHP, AWS CLI, and tools ---
- apt install -y apache2 ghostscript libapache2-mod-php mysql-client \
-    php php-bcmath php-curl php-imagick php-intl php-json php-mbstring \
-    php-mysql php-xml php-zip unzip curl wget
+# apt install -y apache2 ghostscript libapache2-mod-php mysql-client \
+#    php php-bcmath php-curl php-imagick php-intl php-json php-mbstring \
+#    php-mysql php-xml php-zip unzip curl wget
 
 # --- Setup WordPress directory ---
-mkdir -p /srv/www
-chown www-data:www-data /srv/www 
-curl -s -o /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
-tar -xzf /tmp/wordpress.tar.gz -C /srv/www
-chown -R www-data:www-data /srv/www/wordpress
+#mkdir -p /srv/www
+#chown www-data:www-data /srv/www 
+#curl -s -o /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
+#tar -xzf /tmp/wordpress.tar.gz -C /srv/www
+#chown -R www-data:www-data /srv/www/wordpress
 
 # --- Apache VirtualHost ---
 cat <<'EOF' >/etc/apache2/sites-available/wordpress.conf
@@ -31,7 +31,6 @@ EOF
 a2ensite wordpress
 a2enmod rewrite
 a2dissite 000-default
-service apache2 reload
 
 
 DBUSER=$(cat /run/secrets/db_user)

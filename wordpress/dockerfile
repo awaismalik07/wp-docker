@@ -8,6 +8,13 @@ RUN apt-get update -y && apt-get upgrade -y && \
        php php-bcmath php-curl php-imagick php-intl php-json php-mbstring \
        php-mysql php-xml php-zip unzip curl wget && \
     rm -rf /var/lib/apt/lists/*
+# Download WordPress during build
+# Download WordPress during build
+RUN mkdir -p /srv/www \
+    && curl -s -o /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz \
+    && tar -xzf /tmp/wordpress.tar.gz -C /srv/www \
+    && rm /tmp/wordpress.tar.gz \
+    && chown -R www-data:www-data /srv/www/wordpress
 
 # Copy startup script
 COPY script.sh /usr/local/bin/script.sh
